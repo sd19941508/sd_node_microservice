@@ -56,8 +56,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: qa-node-microservice
-          environment_name: Qa-node-microservice-env
+          application_name: sd-app-2
+          environment_name: Sd-app-2-env
           version_label: "ver-${{ github.sha }}"
           region: ap-south-1
           deployment_package: deploy.zip
