@@ -1,5 +1,13 @@
 version: "3"
 services:
+  nosql-db:
+    image: mongo
+    ports:
+      - "27018:27017"
+    container_name: nosql-db
+    volumes:
+      - ./db/:/data/db
+
   rabbitmq:
     image: rabbitmq:alpine
     container_name: rabbitmq
@@ -15,10 +23,14 @@ services:
       - "8002:8002"
     restart: always
     depends_on:
+      - "nosql-db"
       - "rabbitmq"
+    volumes:
+      - .:/app
+      - /app/products/node_modules
+
     env_file:
       - ./products/.env.dev
-
   shopping:
     build:
       dockerfile: Dockerfile
@@ -28,10 +40,13 @@ services:
       - "8003:8003"
     restart: always
     depends_on:
+      - "nosql-db"
       - "rabbitmq"
+    volumes:
+      - .:/app
+      - /app/shopping/node_modules
     env_file:
       - ./shopping/.env.dev
-
   customer:
     build:
       dockerfile: Dockerfile
@@ -41,10 +56,13 @@ services:
       - "8001:8001"
     restart: always
     depends_on:
+      - "nosql-db"
       - "rabbitmq"
+    volumes:
+      - .:/app/
+      - /app/customer/node_modules
     env_file:
       - ./customer/.env.dev
-
   nginx-proxy:
     build:
       dockerfile: Dockerfile
