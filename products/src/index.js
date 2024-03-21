@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { PORT } = require("./config");
 const { databaseConnection } = require("./database");
 const expressApp = require("./express-app");
@@ -7,6 +8,9 @@ require("dotenv").config();
 
 const StartServer = async () => {
   const app = express();
+
+  // Enable all CORS requests
+  app.use(cors());
 
   await databaseConnection();
 
