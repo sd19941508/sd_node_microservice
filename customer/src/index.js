@@ -9,8 +9,11 @@ require("dotenv").config();
 const StartServer = async () => {
   const app = express();
 
+  const corsOptions = {
+    origin: "*",
+  };
   // Enable all CORS requests
-  app.use(cors());
+  app.use(cors(corsOptions));
 
   await databaseConnection();
 

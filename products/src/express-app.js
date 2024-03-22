@@ -16,6 +16,19 @@ module.exports = async (app, channel) => {
   app.use((req, res, next) => {
     console.clear();
     console.log(`**** Service Products [ New request: ${req.path} ] ****`);
+
+    console.log(`**** CORS configuration ****`);
+    res.setHeader("Access-Control-Allow-Origin", "*"); // Adjust the origin accordingly
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS, PUT, DELETE"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "X-Requested-With, Content-Type, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", true);
+
     next();
   });
 
