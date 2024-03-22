@@ -28,6 +28,16 @@ module.exports = (app, channel) => {
     }
   });
 
+  app.get("/verify", UserAuth, async (req, res, next) => {
+    try {
+      return res
+        .status(403)
+        .json({ message: "Authorized", isTokenValid: true });
+    } catch (err) {
+      next(err);
+    }
+  });
+
   app.post("/address", UserAuth, async (req, res, next) => {
     try {
       const { _id } = req.user;
