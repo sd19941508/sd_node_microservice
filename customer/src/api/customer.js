@@ -31,7 +31,7 @@ module.exports = (app, channel) => {
   app.get("/verify", UserAuth, async (req, res, next) => {
     try {
       return res
-        .status(403)
+        .status(200)
         .json({ message: "Authorized", isTokenValid: true });
     } catch (err) {
       next(err);
