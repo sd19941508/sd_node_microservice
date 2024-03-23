@@ -30,9 +30,11 @@ module.exports = (app, channel) => {
 
   app.get("/verify", UserAuth, async (req, res, next) => {
     try {
+      const { _id } = req.user;
+      const { data } = await service.GetProfile({ _id });
       return res
         .status(200)
-        .json({ message: "Authorized", isTokenValid: true });
+        .json({ message: "Authorized", isTokenValid: true, data });
     } catch (err) {
       next(err);
     }
