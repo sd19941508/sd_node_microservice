@@ -32,10 +32,9 @@ module.exports = (app, channel) => {
     try {
       const { _id } = req.user;
       const { data } = await service.GetProfile({ _id });
-      return res.json(data);
       return res
         .status(200)
-        .json({ message: "Authorized", isTokenValid: true });
+        .json({ message: "Authorized", isTokenValid: true, data });
     } catch (err) {
       next(err);
     }
